@@ -15,7 +15,7 @@ if [ $? != 0 ]; then
 
   # Create a new window to be the dev server.
   tmux new-window -n server -t lore
-  tmux send-keys -t lore "yarn dev" C-m
+  tmux send-keys -t lore "npm run dev" C-m
 
   # Attach to the session
   tmux select-window -t lore:1
