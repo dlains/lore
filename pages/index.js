@@ -9,7 +9,7 @@ export default function Home() {
   };
 
   return (
-    <div>
+    <div className="container mx-auto">
       <Head>
         <meta name="robots" content="follow, index" />
         <meta name="description" content={meta.description} />
@@ -27,7 +27,7 @@ export default function Home() {
       </Head>
 
       <main>
-        <h1>
+        <h1 className="text-4xl">
           David Lains
         </h1>
         <ul>
