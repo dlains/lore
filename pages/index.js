@@ -1,7 +1,9 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import Layout from '../components/layout';
 import swr from 'swr';
+
+import Layout from '../components/layout';
+import PostSummary from '../components/post-summary';
 
 export default function Home() {
   const { data: posts } = swr('/api/posts');
@@ -17,16 +19,8 @@ export default function Home() {
           David Lains
         </h1>
         {posts && posts.map(post => (
-          <p key={post.id}>{post.title}</p>
+          <PostSummary key={post.id} post={post} />
         ))}
-        <ul>
-          <li>
-            Read{' '}
-            <Link href="/posts/first-post">
-              <a>this page!</a>
-            </Link>
-          </li>
-        </ul>
       </main>
 
       <footer>
