@@ -1,7 +1,6 @@
 import Link from 'next/link';
 
 export default function PostSummary(props) {
-  debugger;
   return (
     <div>
       <h1 className="text-2xl">
