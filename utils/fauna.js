@@ -2,23 +2,17 @@ const fauna = require('faunadb');
 const client = new fauna.Client({
   secret: process.env.FAUNA_SECRET
 });
-const query = fauna.query;
+const q = fauna.query;
 
 const getPosts = async () => {
   const { data } = await client.query(
-    query.Map(
-      query.Paginate(query.Documents(query.Collection('posts'))),
-      query.Lambda('ref', query.Get(query.Var('ref')))
+    q.Map(
+      q.Paginate(q.Match(q.Index('all_posts'))),
+      q.Lambda('ref', q.Get(q.Var('ref')))
     )
   );
 
-  const posts = data.map(post => {
-    post.id = post.ref.id;
-    delete post.ref;
-    return post;
-  });
-
-  return posts;
+  return data;
 };
 
 const getPost = async (slug) => {
