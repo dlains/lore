@@ -9,11 +9,25 @@ export default function PostForm({ post }) {
       slug: post ? post.data.slug : '',
       summary: post ? post.data.summary : '',
       content: post ? post.data.content : '',
+      published: post ? post.data.published : false
     },
   });
 
   const createPost = async (data) => {
     console.log(data);
+    // This works, but I don't want random people on the internet creating posts in my Fauna DB.
+    // const { title, slug, summary, content, published } = data;
+    // try {
+    //   await fetch('/api/createPost', {
+    //     method: 'POST',
+    //     body: JSON.stringify({ title, slug, summary, content, published }),
+    //     headers: {
+    //       'Content-Type': 'application/json'
+    //     }
+    //   });
+    // } catch(error) {
+    //   console.error(error);
+    // }
   };
 
   const updatePost = async (data) => {
@@ -101,6 +115,21 @@ export default function PostForm({ post }) {
               Post content is required.
             </p>
           )}
+      </div>
+      <div className="mb-4">
+        <label
+          className="block text-sm font-bold mb-1"
+          htmlFor="published"
+        >
+          Published
+        </label>
+        <input
+            type="checkbox"
+            name="published"
+            id="published"
+            className="resize-none w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none"
+            {...register("published")}
+          ></input>
       </div>
       <button
         className="bg-red-800 hover:bg-red-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-2"

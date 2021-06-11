@@ -19,8 +19,15 @@ const getPost = async (slug) => {
   // TODO: get post by slug
 };
 
-const createPost = async (post) => {
-  // TODO: create a new post
+const createPost = async (title, slug, summary, content, published) => {
+  let publishedAt = null;
+  if(published === true) {
+    publishedAt = Date.now()
+  }
+
+  return await client.query(q.Create(q.Collection('posts'), {
+    data: { title, slug, summary, content, published, publishedAt }
+  }))
 };
 
 const updatePost = async (post) => {
