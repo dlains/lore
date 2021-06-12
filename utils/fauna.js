@@ -12,11 +12,20 @@ const getPosts = async () => {
     )
   );
 
+  const posts = data.map(post => {
+    post.id = post.ref.id;
+    delete post.ref;
+    return post;
+  });
+  
   return data;
 };
 
-const getPost = async (slug) => {
-  // TODO: get post by slug
+const getPost = async (id) => {
+  const post = await client.query(q.Get(q.Ref(q.Collection('posts'), id)));
+  post.id = post.ref.id
+  delete post.ref;
+  return post;
 };
 
 const createPost = async (title, slug, summary, content, published) => {
@@ -30,8 +39,14 @@ const createPost = async (title, slug, summary, content, published) => {
   }))
 };
 
-const updatePost = async (post) => {
-  // TODO: update a post
+const updatePost = async (id, title, slug, summary, content, published, publishedAt) => {
+  if(published === false) {
+    publishedAt = null;
+  }
+
+  return await client.query(q.Update(q.Ref(q.Collection('posts'), id), {
+    data: { title, slug, summary, content, published, publishedAt }
+  }));
 }
 
 const deletePost = async (slug) => {

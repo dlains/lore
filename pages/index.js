@@ -19,7 +19,7 @@ export default function Home() {
           David Lains
         </h1>
         {posts && posts.map(post => (
-          <PostSummary key={post.ref} post={post} />
+          <PostSummary key={post.id} post={post} />
         ))}
       </main>
 
