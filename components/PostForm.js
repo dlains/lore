@@ -1,8 +1,10 @@
 import React from 'react';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/router';
 
 export default function PostForm({ post }) {
+  const router = useRouter();
   const { register, handleSubmit, formState: { errors } } = useForm({
     defaultValues: {
       title: post ? post.data.title : '',
@@ -15,7 +17,6 @@ export default function PostForm({ post }) {
 
   const createPost = async (data) => {
     console.log(data);
-    // This works, but I don't want random people on the internet creating posts in my Fauna DB.
     // const { title, slug, summary, content, published } = data;
     // try {
     //   await fetch('/api/createPost', {
@@ -25,6 +26,7 @@ export default function PostForm({ post }) {
     //       'Content-Type': 'application/json'
     //     }
     //   });
+    //   router.push('/');
     // } catch(error) {
     //   console.error(error);
     // }
@@ -32,6 +34,22 @@ export default function PostForm({ post }) {
 
   const updatePost = async (data) => {
     console.log(data);
+    // const { title, slug, summary, content, published } = data;
+    // const id = post.id;
+    // const publishedAt = post.publishedAt;
+
+    // try {
+    //   await fetch('/api/updatePost', {
+    //     method: 'PUT',
+    //     body: JSON.stringify({ id, title, slug, summary, content, published, publishedAt }),
+    //     headers: {
+    //       'Content-Type': 'application/json'
+    //     }
+    //   });
+    //   router.push('/');
+    // } catch(error) {
+    //   console.error(error);
+    // }
   }
 
   return (

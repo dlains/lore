@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import PostForm from '../components/PostForm';
+import PostForm from '../../components/PostForm';
 // import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 
 export default function CreatePost() {
