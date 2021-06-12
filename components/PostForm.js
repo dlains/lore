@@ -52,6 +52,22 @@ export default function PostForm({ post }) {
     // }
   }
 
+  const deletePost = async () => {
+    console.log(`Deleting post ${post.id}.`);
+    // try {
+    //     await fetch('/api/deletePost', {
+    //         method: 'DELETE',
+    //         body: JSON.stringify({ id: post.id }),
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //         },
+    //     });
+    //     router.push('/');
+    // } catch (err) {
+    //     console.error(err);
+    // }
+  };
+
   return (
     <form onSubmit={handleSubmit(post ? updatePost : createPost)}>
       <div className="mb-4">
@@ -160,6 +176,15 @@ export default function PostForm({ post }) {
           Cancel
         </a>
       </Link>
+      {post && (
+        <button
+            className="bg-red-800 hover:bg-red-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-2"
+            type="button"
+            onClick={deletePost}
+        >
+            Delete
+        </button>
+      )}
     </form>
   );
 }

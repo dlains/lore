@@ -49,8 +49,8 @@ const updatePost = async (id, title, slug, summary, content, published, publishe
   }));
 }
 
-const deletePost = async (slug) => {
-  // TODO: delete a post
+const deletePost = async (id) => {
+  return await client.query(q.Delete(q.Ref(q.Collection('posts'), id)));
 }
 
 module.exports = {
