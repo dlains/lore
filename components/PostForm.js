@@ -17,55 +17,55 @@ export default function PostForm({ post }) {
 
   const createPost = async (data) => {
     console.log(data);
-    // const { title, slug, summary, content, published } = data;
-    // try {
-    //   await fetch('/api/createPost', {
-    //     method: 'POST',
-    //     body: JSON.stringify({ title, slug, summary, content, published }),
-    //     headers: {
-    //       'Content-Type': 'application/json'
-    //     }
-    //   });
-    //   router.push('/');
-    // } catch(error) {
-    //   console.error(error);
-    // }
+    const { title, slug, summary, content, published } = data;
+    try {
+      await fetch('/api/createPost', {
+        method: 'POST',
+        body: JSON.stringify({ title, slug, summary, content, published }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      router.push('/');
+    } catch(error) {
+      console.error(error);
+    }
   };
 
   const updatePost = async (data) => {
     console.log(data);
-    // const { title, slug, summary, content, published } = data;
-    // const id = post.id;
-    // const publishedAt = post.publishedAt;
+    const { title, slug, summary, content, published } = data;
+    const id = post.id;
+    const publishedAt = post.publishedAt;
 
-    // try {
-    //   await fetch('/api/updatePost', {
-    //     method: 'PUT',
-    //     body: JSON.stringify({ id, title, slug, summary, content, published, publishedAt }),
-    //     headers: {
-    //       'Content-Type': 'application/json'
-    //     }
-    //   });
-    //   router.push('/');
-    // } catch(error) {
-    //   console.error(error);
-    // }
+    try {
+      await fetch('/api/updatePost', {
+        method: 'PUT',
+        body: JSON.stringify({ id, title, slug, summary, content, published, publishedAt }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      router.push('/');
+    } catch(error) {
+      console.error(error);
+    }
   }
 
   const deletePost = async () => {
     console.log(`Deleting post ${post.id}.`);
-    // try {
-    //     await fetch('/api/deletePost', {
-    //         method: 'DELETE',
-    //         body: JSON.stringify({ id: post.id }),
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //         },
-    //     });
-    //     router.push('/');
-    // } catch (err) {
-    //     console.error(err);
-    // }
+    try {
+        await fetch('/api/deletePost', {
+            method: 'DELETE',
+            body: JSON.stringify({ id: post.id }),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        router.push('/');
+    } catch (err) {
+        console.error(err);
+    }
   };
 
   return (

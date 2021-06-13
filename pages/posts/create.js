@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import PostForm from '../../components/PostForm';
-// import { withPageAuthRequired } from '@auth0/nextjs-auth0';
+import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 
 export default function CreatePost() {
     return (
@@ -16,4 +16,5 @@ export default function CreatePost() {
         </div>
     );
 }
-// export const getServerSideProps = withPageAuthRequired();
+
+export const getServerSideProps = withPageAuthRequired();
