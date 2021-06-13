@@ -1,9 +1,18 @@
-import { updatePost } from '../../utils/fauna';
+import { updatePost, getPost } from '../../utils/fauna';
+import { withApiAuthRequired, getSession } from '@auth0/nextjs-auth0';
 
-export default async function handler(req, res) {
+export default withApiAuthRequired(async function handler(req, res) {
+  const session = getSession(req, res);
+  const userId = session.user.sub;
   const { id, title, slug, summary, content, published, publishedAt } = req.body;
+
   if(req.method !== 'PUT') {
     return res.status(405).json({ msg: 'Method not allowed' });
+  }
+
+  const existingRecord = await getPost(id);
+  if(!existingRecord || existingRecord.data.userId !== userId) {
+    return res.status(404).json({ msg: 'Record not found.' });
   }
 
   try {
@@ -13,4 +22,4 @@ export default async function handler(req, res) {
     console.error(error);
     res.status(500).json({ msg: 'Something went wrong' });
   }
-}
+});

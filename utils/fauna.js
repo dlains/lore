@@ -28,14 +28,14 @@ const getPost = async (id) => {
   return post;
 };
 
-const createPost = async (title, slug, summary, content, published) => {
+const createPost = async (title, slug, summary, content, published, userId) => {
   let publishedAt = null;
   if(published === true) {
     publishedAt = Date.now()
   }
 
   return await client.query(q.Create(q.Collection('posts'), {
-    data: { title, slug, summary, content, published, publishedAt }
+    data: { title, slug, summary, content, published, publishedAt, userId }
   }))
 };
 

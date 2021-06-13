@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import { getPost } from '../../../utils/fauna';
 import PostForm from '../../../components/PostForm';
+import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 
 export default function Home({ post }) {
   return (
@@ -16,17 +17,17 @@ export default function Home({ post }) {
   );
 }
 
-export async function getServerSideProps(context) {
-  try {
-    const id = context.params.id;
-    const post = await getPost(id);
-    return {
-      props: { post }
-    };
-  } catch(error) {
-    console.error(error);
-    // context.res.statusCode = 302;
-    // context.res.setHeader('Location', '/');
-    return { props: {} };
+export const getServerSideProps = withPageAuthRequired({
+  async getServerSideProps(context) {
+    try {
+      const id = context.params.id;
+      const post = await getPost(id);
+      return {
+        props: { post }
+      };
+    } catch(error) {
+      console.error(error);
+      return { props: {} };
+    }
   }
-}
+})
