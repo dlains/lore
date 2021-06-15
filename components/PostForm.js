@@ -71,12 +71,7 @@ export default function PostForm({ post }) {
   return (
     <form onSubmit={handleSubmit(post ? updatePost : createPost)}>
       <div className="mb-4">
-        <label
-          className="block text-sm font-bold mb-1"
-          htmlFor="title"
-        >
-          Title
-        </label>
+        <label htmlFor="title" className="block text-sm font-bold mb-1">Title</label>
         <input
             type="text"
             id="title"
@@ -90,12 +85,7 @@ export default function PostForm({ post }) {
         )}
       </div>
       <div className="mb-4">
-        <label
-          className="block text-sm font-bold mb-1"
-          htmlFor="slug"
-        >
-          Slug
-        </label>
+        <label htmlFor="slug" className="block text-sm font-bold mb-1">Slug</label>
         <input
             type="text"
             id="slug"
@@ -109,12 +99,7 @@ export default function PostForm({ post }) {
         )}
       </div>
       <div className="mb-4">
-        <label
-          className="block text-sm font-bold mb-1"
-          htmlFor="summary"
-        >
-          Summary
-        </label>
+        <label htmlFor="summary" className="block text-sm font-bold mb-1">Summary</label>
         <textarea
             name="summary"
             id="summary"
@@ -130,12 +115,7 @@ export default function PostForm({ post }) {
           )}
       </div>
       <div className="mb-4">
-        <label
-          className="block text-sm font-bold mb-1"
-          htmlFor="content"
-        >
-          Content
-        </label>
+        <label htmlFor="content" className="block text-sm font-bold mb-1">Content</label>
         <textarea
             name="content"
             id="content"
@@ -151,25 +131,20 @@ export default function PostForm({ post }) {
           )}
       </div>
       <div className="mb-4">
-        <label
-          className="block text-sm font-bold mb-1"
-          htmlFor="published"
-        >
-          Published
-        </label>
         <input
             type="checkbox"
             name="published"
             id="published"
-            className="resize-none w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none"
+            className="resize-none py-2 text-gray-700 focus:outline-none"
             {...register("published")}
           ></input>
+        <label htmlFor="published" className="font-bold mb-1 ml-2">Published</label>
       </div>
       <button
         className="bg-red-800 hover:bg-red-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-2"
         type="submit"
       >
-          Save
+        Save
       </button>
       <Link href="/">
         <a className="mt-3 inline-block bg-red-800 hover:bg-red-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-2">
@@ -182,7 +157,7 @@ export default function PostForm({ post }) {
             type="button"
             onClick={deletePost}
         >
-            Delete
+          Delete
         </button>
       )}
     </form>
