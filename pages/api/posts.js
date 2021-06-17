@@ -1,4 +1,4 @@
-import { getPosts } from '../../utils/fauna';
+import { getPosts } from '../../utils/postData';
 
 export default async function handler(req, res) {
   if(req.method !== 'GET') {
