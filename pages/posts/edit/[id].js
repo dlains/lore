@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { getPost } from '../../../utils/fauna';
+import { getPost } from '../../../utils/postData';
 import PostForm from '../../../components/PostForm';
 import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 

@@ -1,8 +1,5 @@
-const fauna = require('faunadb');
-const client = new fauna.Client({
-  secret: process.env.FAUNA_SECRET
-});
-const q = fauna.query;
+const fauna = require('faunadb'), q = fauna.query;
+const client = new fauna.Client({ secret: process.env.FAUNA_SECRET });
 
 const getPosts = async () => {
   const { data } = await client.query(

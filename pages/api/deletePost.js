@@ -1,4 +1,4 @@
-import { deletePost, getPost } from '../../utils/fauna';
+import { deletePost, getPost } from '../../utils/postData';
 import { withApiAuthRequired, getSession } from '@auth0/nextjs-auth0';
 
 export default withApiAuthRequired(async function handler(req, res) {
