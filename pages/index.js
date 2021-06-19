@@ -15,9 +15,6 @@ export default function Home() {
       </Head>
 
       <main>
-        <h1 className="text-4xl">
-          David Lains
-        </h1>
         {posts && posts.map(post => (
           <PostSummary key={post.id} post={post} />
         ))}
