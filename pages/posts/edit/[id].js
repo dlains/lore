@@ -10,7 +10,7 @@ export default function Home({ post }) {
         <title>Edit Post</title>
       </Head>
       <main className="max-w-lg mx-auto">
-        <h1 className="text-red-100 text-2xl mb-4">Edit Post</h1>
+        <h1 className="text-2xl mb-4">Edit Post</h1>
         <PostForm post={post} />
       </main>
     </div>
