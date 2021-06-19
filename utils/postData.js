@@ -20,7 +20,14 @@ const getPosts = async () => {
 
 const getPost = async (id) => {
   const post = await client.query(q.Get(q.Ref(q.Collection('posts'), id)));
-  post.id = post.ref.id
+  post.id = post.ref.id;
+  delete post.ref;
+  return post;
+};
+
+const getPostBySlug = async (slug) => {
+  const post = await client.query(q.Get(q.Match(q.Index('post_by_slug'), [slug])));
+  post.id = post.ref.id;
   delete post.ref;
   return post;
 };
@@ -53,6 +60,7 @@ const deletePost = async (id) => {
 module.exports = {
   getPosts,
   getPost,
+  getPostBySlug,
   createPost,
   updatePost,
   deletePost

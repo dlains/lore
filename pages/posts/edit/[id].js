@@ -3,7 +3,7 @@ import { getPost } from '../../../utils/postData';
 import PostForm from '../../../components/PostForm';
 import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 
-export default function Home({ post }) {
+export default function EditPost({ post }) {
   return (
     <div>
       <Head>
