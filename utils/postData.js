@@ -1,3 +1,43 @@
+const path = require('path');
+const envPath = path.resolve(process.cwd(), '.env.local');
+require('dotenv').config({ path: envPath });
+
+async function getConnection() {
+  const mysql = require('mysql2/promise');
+
+  const db = await mysql.createConnection({
+    host: process.env.MYSQL_HOST,
+    database: process.env.MYSQL_DATABASE,
+    user: process.env.MYSQL_USERNAME,
+    password: process.env.MYSQL_PASSWORD,
+    port: process.env.MYSQL_PORT,
+  });
+
+  return db;
+}
+
+const createPost = async (userId, title, slug, summary, content, published) => {
+  const db = await getConnection();
+
+  let publishedAt = null;
+  if(published) {
+    publishedAt = new Date().toISOString().slice(0, 19).replace('T', ' ');
+  }
+
+  try {
+    const results = await db.execute(`
+      INSERT INTO posts (user_id, title, slug, summary, content, published, published_at)
+      VALUES (?, ?, ?, ?, ?, ?, ?)`,
+      [userId, title, slug, summary, content, published, publishedAt]);
+    console.log(results);
+  } catch (e) {
+    console.error(e);
+    console.error('Could not insert post.');
+  }
+};
+
+// Original Fauna code after this point.
+
 const fauna = require('faunadb'), q = fauna.query;
 const client = new fauna.Client({ secret: process.env.FAUNA_SECRET });
 
@@ -32,16 +72,16 @@ const getPostBySlug = async (slug) => {
   return post;
 };
 
-const createPost = async (title, slug, summary, content, published, userId) => {
-  let publishedAt = null;
-  if(published === true) {
-    publishedAt = Date.now()
-  }
+// const createPost = async (title, slug, summary, content, published, userId) => {
+//   let publishedAt = null;
+//   if(published === true) {
+//     publishedAt = Date.now()
+//   }
 
-  return await client.query(q.Create(q.Collection('posts'), {
-    data: { title, slug, summary, content, published, publishedAt, userId }
-  }))
-};
+//   return await client.query(q.Create(q.Collection('posts'), {
+//     data: { title, slug, summary, content, published, publishedAt, userId }
+//   }))
+// };
 
 const updatePost = async (id, title, slug, summary, content, published, publishedAt) => {
   if(published === false) {

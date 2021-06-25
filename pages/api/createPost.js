@@ -11,7 +11,7 @@ export default withApiAuthRequired(async function handler(req, res) {
   }
 
   try {
-    const createdPost = await createPost(title, slug, summary, content, published, userId);
+    const createdPost = await createPost(userId, title, slug, summary, content, published);
     return res.status(200).json(createdPost);
   } catch(error) {
     console.error(error);
