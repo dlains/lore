@@ -4,14 +4,15 @@ import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
 
 export default function PostForm({ post }) {
+  post = JSON.parse(post);
   const router = useRouter();
   const { register, handleSubmit, formState: { errors } } = useForm({
     defaultValues: {
-      title: post ? post.data.title : '',
-      slug: post ? post.data.slug : '',
-      summary: post ? post.data.summary : '',
-      content: post ? post.data.content : '',
-      published: post ? post.data.published : false
+      title: post ? post.title : '',
+      slug: post ? post.slug : '',
+      summary: post ? post.summary : '',
+      content: post ? post.content : '',
+      published: post ? post.published : false
     },
   });
 
@@ -36,12 +37,12 @@ export default function PostForm({ post }) {
     console.log(data);
     const { title, slug, summary, content, published } = data;
     const id = post.id;
-    const publishedAt = post.publishedAt;
+    const publishedChanged = published !== post.published;
 
     try {
       await fetch('/api/updatePost', {
         method: 'PUT',
-        body: JSON.stringify({ id, title, slug, summary, content, published, publishedAt }),
+        body: JSON.stringify({ id, title, slug, summary, content, published, publishedChanged }),
         headers: {
           'Content-Type': 'application/json'
         }
