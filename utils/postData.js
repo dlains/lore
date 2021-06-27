@@ -127,7 +127,6 @@ const deletePost = async (id) => {
     console.error(e);
     console.error(`Unable to delete post with id: ${id}.`);
   }
-  // return await client.query(q.Delete(q.Ref(q.Collection('posts'), id)));
 }
 
 module.exports = {
