@@ -4,7 +4,10 @@ import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
 
 export default function PostForm({ post }) {
-  post = JSON.parse(post);
+  if(post) {
+    post = JSON.parse(post);
+  }
+
   const router = useRouter();
   const { register, handleSubmit, formState: { errors } } = useForm({
     defaultValues: {

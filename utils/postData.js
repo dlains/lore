@@ -45,11 +45,6 @@ const getPostBySlug = async (slug) => {
     console.error(e);
     console.error(`Unable to load post with slug: ${slug}.`);
   }
-
-  // const post = await client.query(q.Get(q.Match(q.Index('post_by_slug'), [slug])));
-  // post.id = post.ref.id;
-  // delete post.ref;
-  // return post;
 };
 
 const getPosts = async (published = true) => {
@@ -121,13 +116,18 @@ const updatePost = async (id, title, slug, summary, content, published, publishe
   }
 }
 
-// Original Fauna code after this point.
-
-const fauna = require('faunadb'), q = fauna.query;
-const client = new fauna.Client({ secret: process.env.FAUNA_SECRET });
-
 const deletePost = async (id) => {
-  return await client.query(q.Delete(q.Ref(q.Collection('posts'), id)));
+  const db = await getConnection();
+
+  try {
+    await db.execute(`
+      DELETE FROM posts
+      WHERE id = ?`, [id]);
+  } catch(e) {
+    console.error(e);
+    console.error(`Unable to delete post with id: ${id}.`);
+  }
+  // return await client.query(q.Delete(q.Ref(q.Collection('posts'), id)));
 }
 
 module.exports = {
