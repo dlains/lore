@@ -31,6 +31,27 @@ const getPost = async (id) => {
   }
 };
 
+const getPostBySlug = async (slug) => {
+  const db = await getConnection();
+
+  try {
+    const [row, fields] = await db.execute(`
+      SELECT * FROM posts
+      WHERE slug = ?
+      LIMIT 1`, [slug]);
+    
+    return JSON.stringify(row[0]);
+  } catch(e) {
+    console.error(e);
+    console.error(`Unable to load post with slug: ${slug}.`);
+  }
+
+  // const post = await client.query(q.Get(q.Match(q.Index('post_by_slug'), [slug])));
+  // post.id = post.ref.id;
+  // delete post.ref;
+  // return post;
+};
+
 const getPosts = async (published = true) => {
   const db = await getConnection();
 
@@ -104,13 +125,6 @@ const updatePost = async (id, title, slug, summary, content, published, publishe
 
 const fauna = require('faunadb'), q = fauna.query;
 const client = new fauna.Client({ secret: process.env.FAUNA_SECRET });
-
-const getPostBySlug = async (slug) => {
-  const post = await client.query(q.Get(q.Match(q.Index('post_by_slug'), [slug])));
-  post.id = post.ref.id;
-  delete post.ref;
-  return post;
-};
 
 const deletePost = async (id) => {
   return await client.query(q.Delete(q.Ref(q.Collection('posts'), id)));
