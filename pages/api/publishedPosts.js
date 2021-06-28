@@ -1,4 +1,4 @@
-import { getPosts } from '../../utils/postData';
+import { getPublishedPosts } from '../../utils/postData';
 
 export default async function handler(req, res) {
   if(req.method !== 'GET') {
@@ -6,7 +6,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const posts = await getPosts();
+    const posts = await getPublishedPosts();
     return res.status(200).json(posts);
   } catch(error) {
     console.error(error);
