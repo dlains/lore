@@ -6,7 +6,7 @@ import Layout from '../components/Layout';
 import PostSummary from '../components/PostSummary';
 
 export default function Home() {
-  const { data: posts } = swr('/api/posts');
+  const { data: posts } = swr('/api/publishedPosts');
 
   return (
     <Layout>

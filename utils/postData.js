@@ -47,20 +47,35 @@ const getPostBySlug = async (slug) => {
   }
 };
 
-const getPosts = async (published = true) => {
+const getPosts = async () => {
   const db = await getConnection();
 
   try {
     const [rows, fields] = await db.execute(`
       SELECT * FROM posts
-      WHERE published = ?
-      ORDER BY published_at DESC;`,
-      [published]
+      ORDER BY published_at DESC;`
     );
     return rows;
   } catch(e) {
     console.error(e);
-    console.error('Could not insert post.');
+    console.error('Could not get posts.');
+    return [];
+  }
+}
+
+const getPublishedPosts = async () => {
+  const db = await getConnection();
+
+  try {
+    const [rows, fields] = await db.execute(`
+      SELECT * FROM posts
+      WHERE published = 1
+      ORDER BY published_at DESC;`
+    );
+    return rows;
+  } catch(e) {
+    console.error(e);
+    console.error('Could not get posts.');
     return [];
   }
 };
@@ -80,7 +95,7 @@ const createPost = async (userId, title, slug, summary, content, published) => {
       [userId, title, slug, summary, content, published, publishedAt]);
   } catch (e) {
     console.error(e);
-    console.error('Could not insert post.');
+    console.error('Could not create post.');
   }
 };
 
@@ -131,6 +146,7 @@ const deletePost = async (id) => {
 
 module.exports = {
   getPosts,
+  getPublishedPosts,
   getPost,
   getPostBySlug,
   createPost,
