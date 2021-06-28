@@ -10,8 +10,10 @@ export default withApiAuthRequired(async function handler(req, res) {
   }
 
   const { id } = req.body;
-  const existingRecord = await getPost(id);
-  if(!existingRecord || existingRecord.data.userId !== userId) {
+
+  const data = await getPost(id);
+  const existingRecord = JSON.parse(data);
+  if(!existingRecord || existingRecord.user_id !== userId) {
     return res.status(404).json({ msg: 'Record not found.' });
   }
   
