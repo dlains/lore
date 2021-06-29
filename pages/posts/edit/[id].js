@@ -1,19 +1,21 @@
 import Head from 'next/head';
+import { withPageAuthRequired } from '@auth0/nextjs-auth0';
+
 import { getPost } from '../../../utils/postData';
 import PostForm from '../../../components/PostForm';
-import { withPageAuthRequired } from '@auth0/nextjs-auth0';
+import Layout from '../../../components/Layout';
 
 export default function EditPost({ post }) {
   return (
-    <div>
+    <Layout>
       <Head>
         <title>Edit Post</title>
       </Head>
-      <main className="max-w-lg mx-auto">
+      <main>
         <h1 className="text-2xl mb-4">Edit Post</h1>
         <PostForm post={post} />
       </main>
-    </div>
+    </Layout>
   );
 }
 
@@ -30,4 +32,4 @@ export const getServerSideProps = withPageAuthRequired({
       return { props: {} };
     }
   }
-})
+});

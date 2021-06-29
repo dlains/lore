@@ -54,7 +54,7 @@ export default function PostForm({ post }) {
     } catch(error) {
       console.error(error);
     }
-  }
+  };
 
   const deletePost = async () => {
     console.log(`Deleting post ${post.id}.`);

@@ -17,5 +17,5 @@ export default function Projects() {
         <a href="/">Copyright &copy; 2021 David Lains</a>
       </footer>
     </Layout>
-  )
+  );
 }

@@ -24,5 +24,5 @@ export default function Home() {
         <a href="/">Copyright &copy; 2021 David Lains</a>
       </footer>
     </Layout>
-  )
+  );
 }

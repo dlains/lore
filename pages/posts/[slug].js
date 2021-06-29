@@ -1,17 +1,19 @@
 import Head from 'next/head';
+
 import Post from '../../components/Post';
 import { getPostBySlug } from '../../utils/postData';
+import Layout from '../../components/Layout';
 
 export default function ViewPost({ post }) {
   return (
-    <div>
+    <Layout>
       <Head>
         <title>View Post</title>
       </Head>
-      <main className="max-w-lg mx-auto">
+      <main>
         <Post post={post} />
       </main>
-    </div>
+    </Layout>
   );
 }
 
