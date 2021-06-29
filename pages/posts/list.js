@@ -1,9 +1,9 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import { withPageAuthRequired } from '@auth0/nextjs-auth0';
-import { getPosts } from '../../utils/postData';
 import { useUser } from '@auth0/nextjs-auth0';
 
+import { getPosts } from '../../utils/postData';
 import Layout from '../../components/Layout';
 
 export default function PostList({ posts }) {
@@ -50,7 +50,7 @@ export default function PostList({ posts }) {
         <a href="/">Copyright &copy; 2021 David Lains</a>
       </footer>
     </Layout>
-  )
+  );
 }
 
 export const getServerSideProps = withPageAuthRequired({
@@ -71,4 +71,4 @@ export const getServerSideProps = withPageAuthRequired({
       return { props: {} };
     }
   }
-})
+});

@@ -8,7 +8,7 @@ function MyApp({ Component, pageProps }) {
       <Navbar />
       <Component {...pageProps} />
     </UserProvider>
-  )
+  );
 }
 
 export default MyApp

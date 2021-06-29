@@ -34,7 +34,7 @@ class LoreDocument extends Document {
           <NextScript />
         </body>
       </Html>
-    )
+    );
   }
 }
 
