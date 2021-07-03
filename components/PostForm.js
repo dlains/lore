@@ -75,12 +75,12 @@ export default function PostForm({ post }) {
   return (
     <form onSubmit={handleSubmit(post ? updatePost : createPost)}>
       <div className="mb-4">
-        <label htmlFor="title" className="block text-sm font-bold mb-1">Title</label>
+        <label htmlFor="title" className="text-gray-700">Title</label>
         <input
             type="text"
             id="title"
             name="title"
-            className="w-full border bg-white rounded px-3 py-2 outline-none text-gray-700"
+            className="mt-1 block w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0"
             placeholder="Post title"
             {...register("title", { required: true })}
         />
@@ -89,7 +89,7 @@ export default function PostForm({ post }) {
         )}
       </div>
       <div className="mb-4">
-        <label htmlFor="slug" className="block text-sm font-bold mb-1">Slug</label>
+        <label htmlFor="slug" className="text-gray-700">Slug</label>
         <input
             type="text"
             id="slug"
@@ -103,12 +103,12 @@ export default function PostForm({ post }) {
         )}
       </div>
       <div className="mb-4">
-        <label htmlFor="summary" className="block text-sm font-bold mb-1">Summary</label>
+        <label htmlFor="summary" className="text-gray-700">Summary</label>
         <textarea
             name="summary"
             id="summary"
             rows="2"
-            className="resize-none w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none"
+            className="mt-1 block w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0"
             placeholder="A short summary of the Post content."
             {...register("summary", { required: true })}
           ></textarea>
@@ -119,12 +119,12 @@ export default function PostForm({ post }) {
           )}
       </div>
       <div className="mb-4">
-        <label htmlFor="content" className="block text-sm font-bold mb-1">Content</label>
+        <label htmlFor="content" className="text-gray-700">Content</label>
         <textarea
             name="content"
             id="content"
             rows="6"
-            className="resize-none w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none"
+            className="mt-1 block w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0"
             placeholder="The Post content."
             {...register("content", { required: true })}
           ></textarea>
@@ -139,10 +139,10 @@ export default function PostForm({ post }) {
             type="checkbox"
             name="published"
             id="published"
-            className="resize-none py-2 text-gray-700 focus:outline-none"
+            className="rounded bg-gray-200 border-transparent focus:border-transparent focus:bg-gray-200 text-gray-700 focus:ring-1 focus:ring-offset-2 focus:ring-gray-500"
             {...register("published")}
           ></input>
-        <label htmlFor="published" className="font-bold mb-1 ml-2">Published</label>
+        <label htmlFor="published" className="text-gray-700 ml-2">Published</label>
       </div>
       <button
         className="bg-red-800 hover:bg-red-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-2"
