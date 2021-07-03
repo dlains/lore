@@ -17,11 +17,6 @@ export default function PostSummary({ post }) {
         </Link>
       </PostTitle>
       <time dateTime={post.published_at}>{published}</time>
-      {user && user.sub === post.user_id && (
-        <Link href={`/posts/edit/${post.id}`}>
-          <a className="text-gray-800 ml-2">Edit</a>
-        </Link>
-      )}
       <ReactMarkdown remarkPlugins={[gfm]}>{post.summary}</ReactMarkdown>
     </div>
   );
