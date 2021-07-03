@@ -1,15 +1,17 @@
 import ReactMarkdown from 'react-markdown';
 import gfm from 'remark-gfm'
 
+import PostTitle from './PostTitle';
+
 export default function PostSummary({ post }) {
   post = JSON.parse(post);
   const published = new Date(post.published_at).toLocaleDateString();
 
   return (
     <div>
-      <h1 className="text-2xl">
+      <PostTitle>
         {post.title}
-      </h1>
+      </PostTitle>
       <time dateTime={post.published_at}>{published}</time>
       <ReactMarkdown remarkPlugins={[gfm]}>{post.content}</ReactMarkdown>
     </div>
