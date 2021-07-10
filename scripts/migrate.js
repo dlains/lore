@@ -36,6 +36,7 @@ async function migrate() {
         user_id VARCHAR(255),
         title VARCHAR(255) NOT NULL,
         slug VARCHAR(255) NOT NULL,
+        banner VARCHAR(255),
         summary TEXT,
         content TEXT,
         published BOOLEAN DEFAULT FALSE,

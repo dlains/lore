@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { useUser } from '@auth0/nextjs-auth0';
 import ReactMarkdown from 'react-markdown';
 import gfm from 'remark-gfm'
@@ -12,6 +13,7 @@ export default function PostSummary({ post }) {
   return (
     <div>
       <PostTitle>
+        <Image src={`https://lore.nyc3.digitaloceanspaces.com/media/${post.banner}`} alt="Post Banner" width="100%" height="100%" />
         <Link href={`/posts/${post.slug}`}>
           <a>{post.title}</a>
         </Link>
