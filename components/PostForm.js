@@ -13,19 +13,57 @@ export default function PostForm({ post }) {
     defaultValues: {
       title: post ? post.title : '',
       slug: post ? post.slug : '',
+      banner: post ? post.banner : '',
       summary: post ? post.summary : '',
       content: post ? post.content : '',
       published: post ? post.published : false
     },
   });
 
+  const uploadBanners = async (files) => {
+    try {
+      for(let i = 0; i < files.length; i++) {
+        const file = files.item(i);
+        const filename = encodeURIComponent(file.name);
+        const response = await fetch(`/api/uploadUrl?file=${filename}&type=${file.type}`);
+        const { url, fields } = await response.json();
+        const formData = new FormData();
+    
+        Object.entries({ ...fields, file }).forEach(([key, value]) => {
+          formData.append(key, value);
+        });
+    
+        const upload = await fetch(url, {
+          method: 'POST',
+          body: formData
+        });
+
+        // Probably need to send a response back to the function
+        // so it can handle success and error states.
+        if(upload.ok) {
+          console.log('Uploded banner successfully.');
+        } else {
+          console.error('Upload banner failed.');
+        }
+      };
+    } catch(error) {
+      console.error(error);
+    }
+  };
+
   const createPost = async (data) => {
-    console.log(data);
-    const { title, slug, summary, content, published } = data;
+    const { title, slug, banner, summary, content, published } = data;
+
+    let filename = null;
+    if(banner) {
+      await uploadBanners(banner);
+      filename = encodeURIComponent(banner[0].name);
+    }
+
     try {
       await fetch('/api/createPost', {
         method: 'POST',
-        body: JSON.stringify({ title, slug, summary, content, published }),
+        body: JSON.stringify({ title, slug, banner: filename, summary, content, published }),
         headers: {
           'Content-Type': 'application/json'
         }
@@ -94,13 +132,24 @@ export default function PostForm({ post }) {
             type="text"
             id="slug"
             name="slug"
-            className="w-full border bg-white rounded px-3 py-2 outline-none text-gray-700"
+            className="mt-1 block w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0"
             placeholder="Unique identifier for the Post"
             {...register("slug", { required: true })}
         />
         {errors.slug && (
           <p className="font-bold text-red-900">Slug is required</p>
         )}
+      </div>
+      <div className="mb-4">
+          <label htmlFor="banner" className="text-gray-700">Banner</label>
+          <input
+            type="file"
+            id="banner"
+            name="banner"
+            className="mt-1 block w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0"
+            placeholder="Banner image for the Post"
+            {...register("banner")}
+          />
       </div>
       <div className="mb-4">
         <label htmlFor="summary" className="text-gray-700">Summary</label>

@@ -80,7 +80,7 @@ const getPublishedPosts = async () => {
   }
 };
 
-const createPost = async (userId, title, slug, summary, content, published) => {
+const createPost = async (userId, title, slug, banner, summary, content, published) => {
   const db = await getConnection();
 
   let publishedAt = null;
@@ -90,9 +90,9 @@ const createPost = async (userId, title, slug, summary, content, published) => {
 
   try {
     await db.execute(`
-      INSERT INTO posts (user_id, title, slug, summary, content, published, published_at)
-      VALUES (?, ?, ?, ?, ?, ?, ?)`,
-      [userId, title, slug, summary, content, published, publishedAt]);
+      INSERT INTO posts (user_id, title, slug, banner, summary, content, published, published_at)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+      [userId, title, slug, banner, summary, content, published, publishedAt]);
   } catch (e) {
     console.error(e);
     console.error('Could not create post.');
