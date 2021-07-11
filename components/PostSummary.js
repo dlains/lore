@@ -13,7 +13,7 @@ export default function PostSummary({ post }) {
   return (
     <div>
       <PostTitle>
-        <Image src={`https://lore.nyc3.digitaloceanspaces.com/media/${post.banner}`} alt="Post Banner" width="100%" height="100%" />
+        <Image src={`https://lore.nyc3.digitaloceanspaces.com/media/${post.banner}`} alt="Post Banner" width="1200" height="825" />
         <Link href={`/posts/${post.slug}`}>
           <a>{post.title}</a>
         </Link>

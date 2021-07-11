@@ -17,7 +17,8 @@ export default async function handler(req, res) {
       ContentType: req.query.type,
       Fields: {
         key: `media/${req.query.file}`,
-        acl: 'public-read'
+        acl: 'public-read',
+        'Content-Type': req.query.type
       },
       Expires: 60,
     });
