@@ -147,6 +147,7 @@ export default function PostForm({ post }) {
             type="file"
             id="banner"
             name="banner"
+            accept=".webp,.png,.jpg,.jpeg,image/webp,image/png,image/jpeg"
             className="mt-1 block w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0"
             placeholder="Banner image for the Post"
             {...register("banner")}
